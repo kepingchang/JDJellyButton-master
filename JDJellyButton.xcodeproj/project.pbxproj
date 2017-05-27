@@ -15,6 +15,7 @@
 		6B70C4BD1DFA50EA00658345 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6B70C4BB1DFA50EA00658345 /* LaunchScreen.storyboard */; };
 		6B70C4C61DFA512600658345 /* JDJellyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B70C4C51DFA512600658345 /* JDJellyButton.swift */; };
 		6B70C4C81DFA55C200658345 /* JDJellyButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B70C4C71DFA55C200658345 /* JDJellyButtonView.swift */; };
+		6FFC2C951ECE950900E88471 /* UIView+hexa.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFC2C941ECE950900E88471 /* UIView+hexa.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		6B70C4BE1DFA50EA00658345 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6B70C4C51DFA512600658345 /* JDJellyButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JDJellyButton.swift; sourceTree = "<group>"; };
 		6B70C4C71DFA55C200658345 /* JDJellyButtonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JDJellyButtonView.swift; sourceTree = "<group>"; };
+		6FFC2C941ECE950900E88471 /* UIView+hexa.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+hexa.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +62,7 @@
 		6B70C4B11DFA50EA00658345 /* JDJellyButton */ = {
 			isa = PBXGroup;
 			children = (
+				6FFC2C941ECE950900E88471 /* UIView+hexa.swift */,
 				6B70C4C41DFA510000658345 /* JDJellyButton */,
 				6B70C4B21DFA50EA00658345 /* AppDelegate.swift */,
 				6B70C4B41DFA50EA00658345 /* ViewController.swift */,
@@ -158,6 +161,7 @@
 				6B70C4B51DFA50EA00658345 /* ViewController.swift in Sources */,
 				4F9B96F01DFC1D8D00019F48 /* JDJellyMainButton.swift in Sources */,
 				6B70C4B31DFA50EA00658345 /* AppDelegate.swift in Sources */,
+				6FFC2C951ECE950900E88471 /* UIView+hexa.swift in Sources */,
 				6B70C4C81DFA55C200658345 /* JDJellyButtonView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

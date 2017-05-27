@@ -42,8 +42,8 @@ class JDJellyMainButton:JDJellyButtonView
     var radius:CGFloat = 30.0
     var halfWidth:CGFloat = 0.0
     var GroupIndex:Int = 0
-    var x:[CGFloat] = [CGFloat]()
-    var y:[CGFloat] = [CGFloat]()
+    var xs:[CGFloat] = [CGFloat]()
+    var ys:[CGFloat] = [CGFloat]()
     
     var delegate:MainButtonDelegate?
     
@@ -97,35 +97,35 @@ class JDJellyMainButton:JDJellyButtonView
     
     func caculateJellyPosition()
     {
-        x = [CGFloat]()
-        y = [CGFloat]()
+        xs = [CGFloat]()
+        ys = [CGFloat]()
         if(ExpandType == .Cross)
         {
-        x = [-(halfWidth + radius),halfWidth + radius ,halfWidth + radius,0]
-        y = [-(halfWidth + radius),-(halfWidth + radius),0 ,halfWidth + radius]
+        xs = [-(halfWidth + radius),halfWidth + radius ,halfWidth + radius,0]
+        ys = [-(halfWidth + radius),-(halfWidth + radius),0 ,halfWidth + radius]
         }
         else if(ExpandType == .LeftLine)
         {
             for i in 1..<8
             {
-                x.append(-(halfWidth + radius) * CGFloat(i))
-                y.append(0.0)
+                xs.append(-(halfWidth + radius) * CGFloat(i))
+                ys.append(0.0)
             }
         }
         else if(ExpandType == .RightLine)
         {
             for i in 1..<8
             {
-                x.append((halfWidth + radius) * CGFloat(i))
-                y.append(0.0)
+                xs.append((halfWidth + radius) * CGFloat(i))
+                ys.append(0.0)
             }
         }
         else if(ExpandType == .UpperLine)
         {
             for i in 1..<8
             {
-                y.append(-(halfWidth + radius) * CGFloat(i))
-                x.append(0.0)
+                ys.append(-(halfWidth + radius) * CGFloat(i))
+                xs.append(0.0)
             }
         }
     }
@@ -139,7 +139,7 @@ class JDJellyMainButton:JDJellyButtonView
             temp_bgs.groupPositionDiff?.removeAll()
             for i in 0..<bg.buttongroup.count
             {
-            temp_bgs.groupPositionDiff?.append(CGPoint(x: x[i], y: y[i]))
+            temp_bgs.groupPositionDiff?.append(CGPoint(x: xs[i], y: ys[i]))
             }
             buttongroups[index] = temp_bgs
             index += 1
@@ -158,7 +158,7 @@ class JDJellyMainButton:JDJellyButtonView
         
         for i in 0..<bgs.buttongroup.count
         {
-            let cgpoint:CGPoint = CGPoint(x: x[i] , y: y[i])
+            let cgpoint:CGPoint = CGPoint(x: xs[i] , y: ys[i])
             temp_bgs.groupPositionDiff?.append(cgpoint)
         }
         buttongroups.append(temp_bgs)

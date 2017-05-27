@@ -42,8 +42,10 @@ class JDJellyButtonView:UIView
         super.init(frame: frame)
         
         self.layer.cornerRadius = 0.4 * self.frame.width
+//        self.layer.masksToBounds = true
         imgView = UIImageView(image: bgimg)
         imgView?.frame = self.bounds
+//        imgView?.contentMode = .bottom
         self.addSubview(imgView!)
     }
     
