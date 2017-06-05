@@ -193,7 +193,7 @@ class JDJellyMainButton:JDJellyButtonView
                     jellybutton.alpha = 0.0
                     jellybutton.frame = self.frame
                     self.ContainerView!.addSubview(jellybutton)
-                    UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseOut , animations: {
+                    UIView.animate(withDuration: 0.3, delay: 0.0, options: .curveEaseOut , animations: {
                         jellybutton.frame.origin.y +=  (diff?[index].y)!
                         jellybutton.frame.origin.x +=  (diff?[index].x)!
                         jellybutton.alpha = 1.0
@@ -222,7 +222,7 @@ class JDJellyMainButton:JDJellyButtonView
                 {
                     
                     animating = true
-                    UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseOut , animations: {
+                    UIView.animate(withDuration: 0.3, delay: 0.0, options: .curveEaseOut , animations: {
                         jellybutton.frame.origin.y -=  (diff?[index].y)!
                         jellybutton.frame.origin.x -=  (diff?[index].x)!
                         jellybutton.alpha = 0.0
@@ -250,7 +250,7 @@ class JDJellyMainButton:JDJellyButtonView
     {
         LastPoint = touches.first?.location(in: self.rootView!)
         let transform = CGAffineTransform(translationX: 0, y: 6);
-        UIView.animate(withDuration: 0.2) {
+        UIView.animate(withDuration: 0.25) {
             self.transform = transform
         }
         
@@ -285,7 +285,7 @@ class JDJellyMainButton:JDJellyButtonView
         if(LastTime == nil)
         {
             let transform = CGAffineTransform(translationX: 0, y: 0);
-            UIView.animate(withDuration: 0.2) {
+            UIView.animate(withDuration: 0.3) {
                 self.transform = transform
             }
             
@@ -293,7 +293,7 @@ class JDJellyMainButton:JDJellyButtonView
         }
         
         let transform = CGAffineTransform(translationX: 0, y: 0);
-        UIView.animate(withDuration: 0.2) {
+        UIView.animate(withDuration: 0.3) {
             self.transform = transform
         }
         

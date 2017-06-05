@@ -16,24 +16,13 @@ class ViewController: UIViewController {
     @IBOutlet weak var label1: UILabel!
     @IBOutlet weak var label2: UILabel!
 
-    
-    let images:[UIImage] = [UIImage(named: "hide")!,UIImage(named: "quit")!]
-    var imagearr:[[UIImage]] = [[UIImage]]()
-    
-
     override func viewDidLoad() {
         super.viewDidLoad()
-    
-        
         view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        imagearr.append(images)
         
         button = JDJellyButton()
-        button.attachtoView(rootView: self.view,mainbutton: UIImage(named:"vk")!)
+        button.attachtoView(rootView: view,mainbutton: UIImage(named:"vk")!)
         button.delegate = self
-        button.datasource = self
-        button.setJellyType(type: .Cross)
-        
     }
 
 }
@@ -47,16 +36,4 @@ extension ViewController:JellyButtonDelegate
         label2.text = "ArrIndex\(arrindex)"
     }
     
-}
-
-extension ViewController:JDJellyButtonDataSource
-{
-    func groupcount()->Int
-    {
-    return 1
-    }
-    func imagesource(forgroup groupindex:Int) -> [UIImage]
-    {
-    return imagearr[groupindex]
-    }
 }

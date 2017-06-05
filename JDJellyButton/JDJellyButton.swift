@@ -4,11 +4,6 @@ enum ExpandType {
     case Cross
 }
 
-protocol JDJellyButtonDataSource {
-    func groupcount()->Int
-    func imagesource(forgroup groupindex:Int) -> [UIImage]
-}
-
 class JelllyContainer:UIView
 {
     override init(frame: CGRect) {
@@ -42,18 +37,6 @@ class JDJellyButton
     var Container:JelllyContainer!
     var RootView:UIView?
     var delegate:JellyButtonDelegate?
-    var _datasource:JDJellyButtonDataSource?
-    
-    var datasource:JDJellyButtonDataSource?
-    {
-        get{
-            return _datasource
-        }
-        set {
-            self._datasource = newValue
-            reloadData()
-        }
-    }
     
     var buttonWidth:CGFloat = 70.0
     var buttonHeight:CGFloat = 70.0
@@ -78,25 +61,22 @@ class JDJellyButton
         Container.addSubview(MainButton)
         rootView.addSubview(Container)
         
+        reloadData()
     }
     
     func addButtonGroup()
     {
-        let groupcount:Int = (_datasource?.groupcount())!
-        for i in 0..<groupcount
+        var jellybuttons:[JDJellyButtonView] = [JDJellyButtonView]()
+        let imgarr:[UIImage] = [UIImage(named: "hide")!,UIImage(named: "quit")!]
+        for img in imgarr
         {
-            var jellybuttons:[JDJellyButtonView] = [JDJellyButtonView]()
-            let imgarr:[UIImage] = (_datasource?.imagesource(forgroup: i))!
-            for img in imgarr
-            {
-                let MainButtonFrame:CGRect = CGRect(x: (MainButton.width - buttonWidth)/2, y: 0, width: buttonWidth, height: buttonHeight)
-                let jellybutton:JDJellyButtonView = JDJellyButtonView(frame: MainButtonFrame, bgimg: img)
-                jellybutton.tapdelegate = self
-                jellybuttons.append(jellybutton)
-            }
-            let jellybuttongroup:ButtonGroups = ButtonGroups(buttongroup: jellybuttons, groupPositionDiff: nil)
-            MainButton.appendButtonGroup(bgs: jellybuttongroup)
+            let MainButtonFrame:CGRect = CGRect(x: (MainButton.width - buttonWidth)/2, y: 0, width: buttonWidth, height: buttonHeight)
+            let jellybutton:JDJellyButtonView = JDJellyButtonView(frame: MainButtonFrame, bgimg: img)
+            jellybutton.tapdelegate = self
+            jellybuttons.append(jellybutton)
         }
+        let jellybuttongroup:ButtonGroups = ButtonGroups(buttongroup: jellybuttons, groupPositionDiff: nil)
+        MainButton.appendButtonGroup(bgs: jellybuttongroup)
     }
     
     func cleanButtonGroup()
