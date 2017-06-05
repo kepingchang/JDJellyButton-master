@@ -1,11 +1,3 @@
-//
-//  JDJellyButtonView.swift
-//  JDJellyButton
-//
-//  Created by JamesDouble on 2016/12/9.
-//  Copyright © 2016年 jamesdouble. All rights reserved.
-//
-
 import UIKit
 
  protocol JellyButtonDelegate {
@@ -15,7 +7,6 @@ import UIKit
 extension JellyButtonDelegate{
     func JellyButtonHasBeenTap(touch:UITouch,image:UIImage,groupindex:Int,arrindex:Int)
       {
-        
       }
 }
 
@@ -42,22 +33,15 @@ class JDJellyButtonView:UIView
         super.init(frame: frame)
         
         self.layer.cornerRadius = 0.4 * self.frame.width
-//        self.layer.masksToBounds = true
         imgView = UIImageView(image: bgimg)
         imgView?.bounds = self.bounds
         imgView?.center = self.center
         if isMainButton! {
             imgView?.frame = self.bounds
         }
-//        imgView?.contentMode = .bottom
         self.addSubview(imgView!)
     }
-    
-    
-    
-    
-    
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -70,7 +54,6 @@ class JDJellyButtonView:UIView
        print("\(String(describing: groupindex)),\(String(describing: arrindex))")
        tapdelegate?.JellyButtonHasBeenTap(touch: touches.first!,image: image!,groupindex: groupindex!,arrindex: arrindex!)
     }
-    
     
 }
 

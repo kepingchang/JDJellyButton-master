@@ -1,13 +1,3 @@
-//
-//  JDJellyButton.swift
-//  JDJellyButton
-//
-//  Created by JamesDouble on 2016/12/9.
-//  Copyright © 2016年 jamesdouble. All rights reserved.
-//
-
-//Author http://www.flaticon.com/authors/freepik
-
 import UIKit
 
 enum ExpandType {
@@ -48,7 +38,6 @@ class JelllyContainer:UIView
 
 class JDJellyButton
 {
-    //
     var MainButton:JDJellyMainButton!
     var Container:JelllyContainer!
     var RootView:UIView?
@@ -66,14 +55,11 @@ class JDJellyButton
         }
     }
     
-    //
-    var buttonWidth:CGFloat = 40.0
-    var buttonHeight:CGFloat = 40.0
+    var buttonWidth:CGFloat = 80.0
+    var buttonHeight:CGFloat = 80.0
     
     init() {
-        //       Container = JelllyContainer(frame: CGRect(x: 0, y: 0, width: 400, height: 400))
         Container = JelllyContainer(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width))
-        
     }
     
     func reloadData()
@@ -101,10 +87,8 @@ class JDJellyButton
         {
             var jellybuttons:[JDJellyButtonView] = [JDJellyButtonView]()
             let imgarr:[UIImage] = (_datasource?.imagesource(forgroup: i))!
-            print("arrcount\(imgarr.count)")
             for img in imgarr
             {
-                
                 let MainButtonFrame:CGRect = CGRect(x: (MainButton.width - buttonWidth)/2, y: 0, width: buttonWidth, height: buttonHeight)
                 let jellybutton:JDJellyButtonView = JDJellyButtonView(frame: MainButtonFrame, bgimg: img)
                 jellybutton.tapdelegate = self
@@ -150,7 +134,6 @@ extension JDJellyButton:JellyButtonDelegate
     {
         delegate?.JellyButtonHasBeenTap(touch: touch, image: image, groupindex: groupindex, arrindex: arrindex)
     }
-    
 }
 
 

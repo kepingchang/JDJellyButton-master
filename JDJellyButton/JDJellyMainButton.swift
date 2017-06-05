@@ -1,11 +1,3 @@
-//
-//  JDJellyMainButton.swift
-//  JDJellyButton
-//
-//  Created by 郭介騵 on 2016/12/10.
-//  Copyright © 2016年 jamesdouble. All rights reserved.
-//
-
 import UIKit
 
 enum JellyButtonExpandType
@@ -257,8 +249,10 @@ class JDJellyMainButton:JDJellyButtonView
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?)
     {
         LastPoint = touches.first?.location(in: self.rootView!)
-        let transform = CGAffineTransform(scaleX: 0.8, y: 0.8);
-        self.transform = transform
+        let transform = CGAffineTransform(translationX: 0, y: 20);
+        UIView.animate(withDuration: 0.2) { 
+            self.transform = transform
+        }
         
         if(animating)
         {
@@ -290,14 +284,18 @@ class JDJellyMainButton:JDJellyButtonView
         
         if(LastTime == nil)
         {
-            let transform = CGAffineTransform(scaleX: 1, y: 1);
-            self.transform = transform
+            let transform = CGAffineTransform(translationX: 0, y: 0);
+            UIView.animate(withDuration: 0.2) {
+                self.transform = transform
+            }
             
             return
         }
         
-        let transform = CGAffineTransform(scaleX: 1, y: 1);
-        self.transform = transform
+        let transform = CGAffineTransform(translationX: 0, y: 0);
+        UIView.animate(withDuration: 0.2) {
+            self.transform = transform
+        }
         
         if(touches.first!.timestamp - LastTime! < 0.15)
         {
