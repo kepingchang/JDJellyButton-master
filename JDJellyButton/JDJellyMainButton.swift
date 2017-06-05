@@ -249,7 +249,7 @@ class JDJellyMainButton:JDJellyButtonView
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?)
     {
         LastPoint = touches.first?.location(in: self.rootView!)
-        let transform = CGAffineTransform(translationX: 0, y: 20);
+        let transform = CGAffineTransform(translationX: 0, y: 6);
         UIView.animate(withDuration: 0.2) { 
             self.transform = transform
         }

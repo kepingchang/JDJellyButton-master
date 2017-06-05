@@ -59,7 +59,7 @@ class JDJellyButton
     var buttonHeight:CGFloat = 80.0
     
     init() {
-        Container = JelllyContainer(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width))
+        Container = JelllyContainer(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
     }
     
     func reloadData()
