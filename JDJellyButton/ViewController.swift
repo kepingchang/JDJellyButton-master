@@ -28,7 +28,6 @@ class ViewController: UIViewController {
         view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         imagearr.append(images)
         
-        
         button = JDJellyButton()
         button.attachtoView(rootView: self.view,mainbutton: UIImage(named:"vk")!)
         button.delegate = self
