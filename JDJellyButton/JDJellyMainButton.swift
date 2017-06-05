@@ -14,7 +14,7 @@ struct ButtonGroups {
 }
 
 protocol MainButtonDelegate {
-     func MainButtonHasBeenTap(touch:UITouch)
+    func MainButtonHasBeenTap(touch:UITouch)
 }
 
 
@@ -49,7 +49,7 @@ class JDJellyMainButton:JDJellyButtonView
     init(frame: CGRect,img:UIImage,Parent:UIView)  {
         super.init(frame: frame, bgimg: img, isMainButton: true)
         self.ContainerView = Parent
-         halfWidth = self.frame.width * 0.5
+        halfWidth = self.frame.width * 0.5
         caculateJellyPosition()
     }
     
@@ -78,10 +78,10 @@ class JDJellyMainButton:JDJellyButtonView
         let buttongroup = nowgroup.buttongroup
         for jellybutton in buttongroup!
         {
-                if(jellybutton.imgView == jelly.imgView)
-                {
-                    return index
-                }
+            if(jellybutton.imgView == jelly.imgView)
+            {
+                return index
+            }
             index += 1
         }
         return index
@@ -93,8 +93,8 @@ class JDJellyMainButton:JDJellyButtonView
         ys = [CGFloat]()
         if(ExpandType == .Cross)
         {
-        xs = [-(halfWidth + radius),halfWidth + radius ,halfWidth + radius,0]
-        ys = [-(halfWidth + radius),-(halfWidth + radius),0 ,halfWidth + radius]
+            xs = [-(halfWidth + radius),halfWidth + radius ,halfWidth + radius,0]
+            ys = [-(halfWidth + radius),-(halfWidth + radius),0 ,halfWidth + radius]
         }
         else if(ExpandType == .LeftLine)
         {
@@ -131,12 +131,12 @@ class JDJellyMainButton:JDJellyButtonView
             temp_bgs.groupPositionDiff?.removeAll()
             for i in 0..<bg.buttongroup.count
             {
-            temp_bgs.groupPositionDiff?.append(CGPoint(x: xs[i], y: ys[i]))
+                temp_bgs.groupPositionDiff?.append(CGPoint(x: xs[i], y: ys[i]))
             }
             buttongroups[index] = temp_bgs
             index += 1
         }
-
+        
     }
     
     func appendButtonGroup(bgs:ButtonGroups)
@@ -232,7 +232,7 @@ class JDJellyMainButton:JDJellyButtonView
                         jellybutton.removeFromSuperview()
                         if(expandagain)
                         {
-                        self.expandButtonGroup()
+                            self.expandButtonGroup()
                         }
                     })
                     index += 1
@@ -241,7 +241,7 @@ class JDJellyMainButton:JDJellyButtonView
         }
     }
     
-
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -250,7 +250,7 @@ class JDJellyMainButton:JDJellyButtonView
     {
         LastPoint = touches.first?.location(in: self.rootView!)
         let transform = CGAffineTransform(translationX: 0, y: 6);
-        UIView.animate(withDuration: 0.2) { 
+        UIView.animate(withDuration: 0.2) {
             self.transform = transform
         }
         

@@ -1,13 +1,13 @@
 import UIKit
 
- protocol JellyButtonDelegate {
+protocol JellyButtonDelegate {
     func JellyButtonHasBeenTap(touch:UITouch,image:UIImage,groupindex:Int,arrindex:Int)
 }
 
 extension JellyButtonDelegate{
     func JellyButtonHasBeenTap(touch:UITouch,image:UIImage,groupindex:Int,arrindex:Int)
-      {
-      }
+    {
+    }
 }
 
 
@@ -24,7 +24,7 @@ class JDJellyButtonView:UIView
     
     init(frame: CGRect,BGColor:UIColor) {
         super.init(frame: frame)
-       
+        
         self.layer.cornerRadius = 0.4 * self.frame.width
         self.backgroundColor = BGColor
     }
@@ -41,17 +41,17 @@ class JDJellyButtonView:UIView
         }
         self.addSubview(imgView!)
     }
-
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?)
     {
-       let image = self.imgView?.image
-       let groupindex = dependingMainButton?.getGroupIndex()
-       let arrindex = dependingMainButton?.getJellyButtonIndex(jelly: self)
-       tapdelegate?.JellyButtonHasBeenTap(touch: touches.first!,image: image!,groupindex: groupindex!,arrindex: arrindex!)
+        let image = self.imgView?.image
+        let groupindex = dependingMainButton?.getGroupIndex()
+        let arrindex = dependingMainButton?.getJellyButtonIndex(jelly: self)
+        tapdelegate?.JellyButtonHasBeenTap(touch: touches.first!,image: image!,groupindex: groupindex!,arrindex: arrindex!)
     }
     
 }
