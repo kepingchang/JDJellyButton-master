@@ -54,25 +54,26 @@ class JDJellyButton
     var RootView:UIView?
     var delegate:JellyButtonDelegate?
     var _datasource:JDJellyButtonDataSource?
- 
+    
     var datasource:JDJellyButtonDataSource?
     {
         get{
-           return _datasource
+            return _datasource
         }
         set {
             self._datasource = newValue
             reloadData()
         }
     }
-
+    
     //
     var buttonWidth:CGFloat = 40.0
     var buttonHeight:CGFloat = 40.0
-    //
     
     init() {
-       Container = JelllyContainer(frame: CGRect(x: 50, y: 50, width: 400, height: 400))
+        //       Container = JelllyContainer(frame: CGRect(x: 0, y: 0, width: 400, height: 400))
+        Container = JelllyContainer(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width))
+        
     }
     
     func reloadData()
@@ -84,13 +85,13 @@ class JDJellyButton
     func attachtoView(rootView:UIView,mainbutton image:UIImage)
     {
         RootView = rootView
-        let MainButtonFrame:CGRect = CGRect(x: 200 - 0.5 * buttonHeight, y: 200 - 0.5 * buttonHeight, width: buttonWidth, height: buttonHeight)
+        let MainButtonFrame:CGRect = CGRect(x: (UIScreen.main.bounds.width - image.size.width) / 2, y: UIScreen.main.bounds.height - image.size.height, width: image.size.width, height: image.size.height)
         MainButton = JDJellyMainButton(frame: MainButtonFrame, img: image, Parent: Container)
         MainButton.rootView = rootView
         MainButton.delegate = self
         Container.addSubview(MainButton)
         rootView.addSubview(Container)
-
+        
     }
     
     func addButtonGroup()
@@ -103,7 +104,8 @@ class JDJellyButton
             print("arrcount\(imgarr.count)")
             for img in imgarr
             {
-                let MainButtonFrame:CGRect = CGRect(x: 0, y: 0, width: buttonWidth, height: buttonHeight)
+                
+                let MainButtonFrame:CGRect = CGRect(x: (MainButton.width - buttonWidth)/2, y: 0, width: buttonWidth, height: buttonHeight)
                 let jellybutton:JDJellyButtonView = JDJellyButtonView(frame: MainButtonFrame, bgimg: img)
                 jellybutton.tapdelegate = self
                 jellybuttons.append(jellybutton)
@@ -128,7 +130,7 @@ class JDJellyButton
         fatalError("init(coder:) has not been implemented")
     }
     
-
+    
 }
 
 extension JDJellyButton:MainButtonDelegate
@@ -150,7 +152,7 @@ extension JDJellyButton:JellyButtonDelegate
     }
     
 }
- 
+
 
 
 

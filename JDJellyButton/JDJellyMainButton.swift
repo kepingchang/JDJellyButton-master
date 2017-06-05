@@ -55,7 +55,7 @@ class JDJellyMainButton:JDJellyButtonView
     }
     
     init(frame: CGRect,img:UIImage,Parent:UIView)  {
-        super.init(frame: frame, bgimg: img)
+        super.init(frame: frame, bgimg: img, isMainButton: true)
         self.ContainerView = Parent
          halfWidth = self.frame.width * 0.5
         caculateJellyPosition()
@@ -326,19 +326,6 @@ class JDJellyMainButton:JDJellyButtonView
         Moving = false
         expandignMove = false
     }
-    
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?)
-    {
-        /*
-         if(Expanding)
-         {
-         return
-         }
-         */
-        let touch = touches.first!
-        delegate?.MainButtonHasBeenTap(touch: touch)
-    }
-    
 }
 
 

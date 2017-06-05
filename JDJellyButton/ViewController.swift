@@ -17,7 +17,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var label2: UILabel!
 
     
-    let images:[UIImage] = [UIImage(named: "badoo")!,UIImage(named: "behance")!]
+    let images:[UIImage] = [UIImage(named: "hide")!,UIImage(named: "quit")!]
     var imagearr:[[UIImage]] = [[UIImage]]()
     
 
@@ -34,6 +34,7 @@ class ViewController: UIViewController {
         button.delegate = self
         button.datasource = self
         button.setJellyType(type: .Cross)
+        
     }
 
 }

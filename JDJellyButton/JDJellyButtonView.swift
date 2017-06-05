@@ -38,16 +38,25 @@ class JDJellyButtonView:UIView
         self.backgroundColor = BGColor
     }
     
-    init(frame: CGRect,bgimg:UIImage) {
+    init(frame: CGRect,bgimg:UIImage, isMainButton:Bool? = false) {
         super.init(frame: frame)
         
         self.layer.cornerRadius = 0.4 * self.frame.width
 //        self.layer.masksToBounds = true
         imgView = UIImageView(image: bgimg)
-        imgView?.frame = self.bounds
+        imgView?.bounds = self.bounds
+        imgView?.center = self.center
+        if isMainButton! {
+            imgView?.frame = self.bounds
+        }
 //        imgView?.contentMode = .bottom
         self.addSubview(imgView!)
     }
+    
+    
+    
+    
+    
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
