@@ -201,7 +201,7 @@ class JDJellyMainButton:JDJellyButtonView
                     jellybutton.alpha = 0.0
                     jellybutton.frame = self.frame
                     self.ContainerView!.addSubview(jellybutton)
-                    UIView.animate(withDuration: 0.6, delay: 0.0, options: .curveEaseOut , animations: {
+                    UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseOut , animations: {
                         jellybutton.frame.origin.y +=  (diff?[index].y)!
                         jellybutton.frame.origin.x +=  (diff?[index].x)!
                         jellybutton.alpha = 1.0
@@ -230,7 +230,7 @@ class JDJellyMainButton:JDJellyButtonView
                 {
                     
                     animating = true
-                    UIView.animate(withDuration: 0.5, delay: 0.0, options: .curveEaseOut , animations: {
+                    UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseOut , animations: {
                         jellybutton.frame.origin.y -=  (diff?[index].y)!
                         jellybutton.frame.origin.x -=  (diff?[index].x)!
                         jellybutton.alpha = 0.0
@@ -243,7 +243,6 @@ class JDJellyMainButton:JDJellyButtonView
                         self.expandButtonGroup()
                         }
                     })
-                    
                     index += 1
                 }
             }
