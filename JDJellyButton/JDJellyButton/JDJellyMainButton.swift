@@ -24,6 +24,7 @@ class JDJellyMainButton:JDJellyButtonView
     var animating:Bool = false
     var Moving:Bool = false
     var expandignMove:Bool = false
+    var isOpen:Bool = false
     var LastPoint:CGPoint?
     var LastTime:TimeInterval?
     var radius:CGFloat = 30.0
@@ -42,7 +43,6 @@ class JDJellyMainButton:JDJellyButtonView
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(buttonOpenAnimation))
         self.addGestureRecognizer(tap)
-        
         caculateJellyPosition()
     }
     
@@ -162,7 +162,7 @@ class JDJellyMainButton:JDJellyButtonView
                     self.Expanding = true
                 })
                 
-                converView = UIView(frame: CGRect(x: 0, y: 0, width:Screen.width , height: Screen.height-150))
+                converView = UIView(frame: CGRect(x: 0, y: 0, width:Screen.width , height: Screen.height))
                 converView.backgroundColor = UIColor.clear
                 jellyButtonView_2?.superview?.insertSubview(converView, at: 1)
                 let tap = UITapGestureRecognizer(target: self, action: #selector(viewDidTap))
@@ -175,7 +175,7 @@ class JDJellyMainButton:JDJellyButtonView
         closingButtonGroup(expandagain: false)
     }
     
-    
+
     func closingButtonGroup(expandagain:Bool)
     {
         if(GroupIndex < buttongroups.count)
@@ -197,6 +197,7 @@ class JDJellyMainButton:JDJellyButtonView
             }
         }
         converView.removeFromSuperview()
+        isOpen = false
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -204,14 +205,20 @@ class JDJellyMainButton:JDJellyButtonView
     }
     
     func buttonOpenAnimation(){
-        let transform = CGAffineTransform(translationX: 0, y:6);
-        UIView.animate(withDuration: 0.25, animations: {
-            self.transform = transform
-        }) { (_) in
-            UIView.animate(withDuration: 0.3, animations: {
-                self.transform = CGAffineTransform.identity
-            })
-            self.expandButtonGroup()
+        
+        if isOpen {
+            closingButtonGroup(expandagain: false)
+        }else{
+            let transform = CGAffineTransform(translationX: 0, y:6);
+            UIView.animate(withDuration: 0.25, animations: {
+                self.transform = transform
+            }) { (_) in
+                UIView.animate(withDuration: 0.3, animations: {
+                    self.transform = CGAffineTransform.identity
+                })
+                self.expandButtonGroup()
+            }
+            isOpen = true
         }
     }
 }

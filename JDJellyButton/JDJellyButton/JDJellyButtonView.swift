@@ -52,6 +52,7 @@ class JDJellyButtonView:UIView
         let groupindex = dependingMainButton?.getGroupIndex()
         let arrindex = dependingMainButton?.getJellyButtonIndex(jelly: self)
         tapdelegate?.JellyButtonHasBeenTap(touch: touches.first!,image: image!,groupindex: groupindex!,arrindex: arrindex!)
+        
     }
 }
 
