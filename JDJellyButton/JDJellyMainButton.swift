@@ -36,6 +36,7 @@ class JDJellyMainButton:JDJellyButtonView
     var GroupIndex:Int = 0
     var xs:[CGFloat] = [CGFloat]()
     var ys:[CGFloat] = [CGFloat]()
+    var coverView:UIView = UIView()
     
     var delegate:MainButtonDelegate?
     
@@ -181,32 +182,55 @@ class JDJellyMainButton:JDJellyButtonView
         {
             let nowgroup:ButtonGroups = buttongroups[GroupIndex]
             let buttongroup = nowgroup.buttongroup
-            let diff = nowgroup.groupPositionDiff
-            var index = 0
             if(!animating)
             {
+                let jellyButtonView_1 = buttongroup!.first
                 
-                for jellybutton in buttongroup!
-                {
-                    
-                    animating = true
-                    jellybutton.alpha = 0.0
-                    jellybutton.frame = self.frame
-                    self.ContainerView!.addSubview(jellybutton)
-                    UIView.animate(withDuration: 0.3, delay: 0.0, options: .curveEaseOut , animations: {
-                        jellybutton.frame.origin.y +=  (diff?[index].y)!
-                        jellybutton.frame.origin.x +=  (diff?[index].x)!
-                        jellybutton.alpha = 1.0
-                    }, completion:   { (value: Bool) in
-                        self.animating = false
-                        self.Expanding = true
-                    })
-                    
-                    index += 1
+                jellyButtonView_1!.alpha = 0.0
+                jellyButtonView_1!.frame = self.frame
+                self.ContainerView!.addSubview(jellyButtonView_1!)
+                UIView.animate(withDuration: 0.3, delay: 0.0, options: .curveEaseOut , animations: {
+                    jellyButtonView_1!.frame.origin.y +=  -52
+                    jellyButtonView_1!.frame.origin.x +=  -54
+                    jellyButtonView_1!.alpha = 1.0
+                }, completion:   { (value: Bool) in
+                    self.animating = false
+                    self.Expanding = true
+                })
+
+                let jellyButtonView_2 = buttongroup!.last
+                
+                jellyButtonView_2!.alpha = 0.0
+                jellyButtonView_2!.frame = self.frame
+                self.ContainerView!.addSubview(jellyButtonView_2!)
+                UIView.animate(withDuration: 0.3, delay: 0.0, options: .curveEaseOut , animations: {
+                    jellyButtonView_2!.frame.origin.y +=  -52
+                    jellyButtonView_2!.frame.origin.x +=  54
+                    jellyButtonView_2!.alpha = 1.0
+                }, completion:   { (value: Bool) in
+                    self.animating = false
+                    self.Expanding = true
+                })
+
+                
+                let  screenSize = UIScreen.main.bounds.size
+                let converView = UIView(frame: CGRect(x: 0, y: 0, width:screenSize.width , height: screenSize.height-150))
+                converView.backgroundColor = UIColor.clear
+                jellyButtonView_2?.superview?.insertSubview(converView, at: 1)
+                let tap = UITapGestureRecognizer(target: self, action: #selector(viewDidTap))
+                converView.addGestureRecognizer(tap)
+                coverView = converView
                 }
-            }
         }
     }
+
+    func viewDidTap(){
+        closingButtonGroup(expandagain: false)
+        DispatchQueue.main.async { [weak self] in
+            self?.coverView.removeFromSuperview()
+        }
+    }
+
     
     func closingButtonGroup(expandagain:Bool)
     {
