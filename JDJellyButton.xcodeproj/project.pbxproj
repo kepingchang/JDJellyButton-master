@@ -81,7 +81,7 @@
 				6B70C4C71DFA55C200658345 /* JDJellyButtonView.swift */,
 				4F9B96EF1DFC1D8D00019F48 /* JDJellyMainButton.swift */,
 			);
-			name = JDJellyButton;
+			path = JDJellyButton;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
