@@ -8,6 +8,21 @@
 
 import UIKit
 
+typealias Screen = HexaConfig.MainScreen
+
+public struct HexaConfig {
+    
+    public struct MainScreen {
+        public static var width: CGFloat {
+            return min(UIScreen.main.bounds.width, UIScreen.main.bounds.height)
+        }
+        public static var height: CGFloat {
+            return max(UIScreen.main.bounds.height, UIScreen.main.bounds.width)
+        }
+    }
+    
+}
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 

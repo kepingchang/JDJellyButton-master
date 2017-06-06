@@ -32,11 +32,15 @@ class JDJellyButton
     var RootView:UIView?
     var delegate:JellyButtonDelegate?
     
-    var buttonWidth:CGFloat = 70.0
-    var buttonHeight:CGFloat = 70.0
+    var buttonWidth:CGFloat = 80.0
+    var buttonHeight:CGFloat = 80.0
     
-    init() {
-        Container = JelllyContainer(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
+    init(Landscape:Bool? = false) {
+        if Landscape! {
+            Container = JelllyContainer(frame: CGRect(x: 0, y: 0, width: Screen.height, height: Screen.width))
+        }else{
+            Container = JelllyContainer(frame: CGRect(x: 0, y: 0, width: Screen.width, height: Screen.height))
+        }
     }
     
     func reloadData()
@@ -45,10 +49,17 @@ class JDJellyButton
         addButtonGroup()
     }
     
-    func attachtoView(rootView:UIView,mainbutton image:UIImage)
+    func attachtoView(rootView:UIView,mainbutton image:UIImage, Landscape:Bool? = false)
     {
         RootView = rootView
-        let MainButtonFrame:CGRect = CGRect(x: (UIScreen.main.bounds.width - image.size.width) / 2, y: UIScreen.main.bounds.height - image.size.height, width: image.size.width, height: 80)
+        
+        var MainButtonFrame:CGRect = CGRect()
+        if Landscape! {
+            MainButtonFrame = CGRect(x: (Screen.height - image.size.width) / 2, y: Screen.width - image.size.height, width: image.size.width, height: 80)
+        }else{
+            MainButtonFrame = CGRect(x: (Screen.width - image.size.width) / 2, y: Screen.height - image.size.height, width: image.size.width, height: 80)
+        }
+        
         MainButton = JDJellyMainButton(frame: MainButtonFrame, img: image, Parent: Container)
         MainButton.imgView?.contentMode = .top
         
@@ -63,7 +74,7 @@ class JDJellyButton
     func addButtonGroup()
     {
         var jellybuttons:[JDJellyButtonView] = [JDJellyButtonView]()
-        let imgarr:[UIImage] = [UIImage(named: "skill_hide")!,UIImage(named: "skill_quit")!]
+        let imgarr:[UIImage] = [UIImage(named: "skill_hide")!, UIImage(named: "skill_quit")!]
         for img in imgarr
         {
             let MainButtonFrame:CGRect = CGRect(x: (MainButton.width - buttonWidth)/2, y: 0, width: buttonWidth, height: buttonHeight)
@@ -91,6 +102,11 @@ class JDJellyButton
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    func hide(){
+        MainButton.removeFromSuperview()
+        Container.removeFromSuperview()
+    }
 }
 
 extension JDJellyButton:MainButtonDelegate
@@ -98,8 +114,8 @@ extension JDJellyButton:MainButtonDelegate
     func MainButtonHasBeenTap(touch:UITouch)
     {
         let point = touch.location(in: RootView!)
-        Container.frame.origin.x = point.x - 0.5 * self.Container.frame.width
-        Container.frame.origin.y = point.y - 0.5 * self.Container.frame.height
+        Container.x = point.x - 0.5 * self.Container.width
+        Container.y = point.y - 0.5 * self.Container.height
     }
     
 }

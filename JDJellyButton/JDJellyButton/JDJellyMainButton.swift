@@ -3,9 +3,6 @@ import UIKit
 enum JellyButtonExpandType
 {
     case Cross
-    case LeftLine
-    case RightLine
-    case UpperLine
 }
 
 struct ButtonGroups {
@@ -38,17 +35,14 @@ class JDJellyMainButton:JDJellyButtonView
     
     var delegate:MainButtonDelegate?
     
-    init(frame: CGRect,BGColor:UIColor,Parent:UIView)  {
-        super.init(frame:frame,BGColor:BGColor)
-        self.ContainerView = Parent
-        halfWidth = self.frame.width * 0.5
-        caculateJellyPosition()
-    }
-    
     init(frame: CGRect,img:UIImage,Parent:UIView)  {
         super.init(frame: frame, bgimg: img, isMainButton: true)
         self.ContainerView = Parent
-        halfWidth = self.frame.width * 0.5
+        halfWidth = self.width * 0.5
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(buttonOpenAnimation))
+        self.addGestureRecognizer(tap)
+        
         caculateJellyPosition()
     }
     
@@ -95,30 +89,6 @@ class JDJellyMainButton:JDJellyButtonView
             xs = [-(halfWidth + radius),halfWidth + radius ,halfWidth + radius,0]
             ys = [-(halfWidth + radius),-(halfWidth + radius),0 ,halfWidth + radius]
         }
-        else if(ExpandType == .LeftLine)
-        {
-            for i in 1..<8
-            {
-                xs.append(-(halfWidth + radius) * CGFloat(i))
-                ys.append(0.0)
-            }
-        }
-        else if(ExpandType == .RightLine)
-        {
-            for i in 1..<8
-            {
-                xs.append((halfWidth + radius) * CGFloat(i))
-                ys.append(0.0)
-            }
-        }
-        else if(ExpandType == .UpperLine)
-        {
-            for i in 1..<8
-            {
-                ys.append(-(halfWidth + radius) * CGFloat(i))
-                xs.append(0.0)
-            }
-        }
     }
     
     func updateJellyPosition()
@@ -155,24 +125,6 @@ class JDJellyMainButton:JDJellyButtonView
         buttongroups.append(temp_bgs)
     }
     
-    func switchButtonGroup()
-    {
-        
-        if(animating)
-        {
-            return
-        }
-        
-        if((GroupIndex + 1) >= buttongroups.count)
-        {
-            GroupIndex = 0
-        }
-        else
-        {
-            GroupIndex += 1
-        }
-        expandButtonGroup()
-    }
     
     func expandButtonGroup()
     {
@@ -188,43 +140,41 @@ class JDJellyMainButton:JDJellyButtonView
                 jellyButtonView_1!.frame = self.frame
                 self.ContainerView!.addSubview(jellyButtonView_1!)
                 UIView.animate(withDuration: 0.3, delay: 0.0, options: .curveEaseOut , animations: {
-                    jellyButtonView_1!.frame.origin.y +=  -52
-                    jellyButtonView_1!.frame.origin.x +=  -54
+                    jellyButtonView_1!.frame.origin.y +=  -57
+                    jellyButtonView_1!.frame.origin.x +=  -59
                     jellyButtonView_1!.alpha = 1.0
                 }, completion:   { (value: Bool) in
                     self.animating = false
                     self.Expanding = true
                 })
-
+                
                 let jellyButtonView_2 = buttongroup!.last
                 
                 jellyButtonView_2!.alpha = 0.0
                 jellyButtonView_2!.frame = self.frame
                 self.ContainerView!.addSubview(jellyButtonView_2!)
                 UIView.animate(withDuration: 0.3, delay: 0.0, options: .curveEaseOut , animations: {
-                    jellyButtonView_2!.frame.origin.y +=  -52
-                    jellyButtonView_2!.frame.origin.x +=  54
+                    jellyButtonView_2!.frame.origin.y +=  -57
+                    jellyButtonView_2!.frame.origin.x +=  59
                     jellyButtonView_2!.alpha = 1.0
                 }, completion:   { (value: Bool) in
                     self.animating = false
                     self.Expanding = true
                 })
-
                 
-                let  screenSize = UIScreen.main.bounds.size
-                converView = UIView(frame: CGRect(x: 0, y: 0, width:screenSize.width , height: screenSize.height-150))
+                converView = UIView(frame: CGRect(x: 0, y: 0, width:Screen.width , height: Screen.height-150))
                 converView.backgroundColor = UIColor.clear
                 jellyButtonView_2?.superview?.insertSubview(converView, at: 1)
                 let tap = UITapGestureRecognizer(target: self, action: #selector(viewDidTap))
                 converView.addGestureRecognizer(tap)
-                }
+            }
         }
     }
-
+    
     func viewDidTap(){
         closingButtonGroup(expandagain: false)
     }
-
+    
     
     func closingButtonGroup(expandagain:Bool)
     {
@@ -232,26 +182,16 @@ class JDJellyMainButton:JDJellyButtonView
         {
             let nowgroup:ButtonGroups = buttongroups[GroupIndex]
             let buttongroup = nowgroup.buttongroup
-            let diff = nowgroup.groupPositionDiff
             var index = 0
             if(!animating)
             {
                 for jellybutton in buttongroup!
                 {
                     animating = true
-                    UIView.animate(withDuration: 0.3, delay: 0.0, options: .curveEaseOut , animations: {
-                        jellybutton.frame.origin.y -=  (diff?[index].y)!
-                        jellybutton.frame.origin.x -=  (diff?[index].x)!
-                        jellybutton.alpha = 0.0
-                    }, completion:   { (value: Bool) in
-                        self.animating = false
-                        self.Expanding = false
-                        jellybutton.removeFromSuperview()
-                        if(expandagain)
-                        {
-                            self.expandButtonGroup()
-                        }
-                    })
+                    jellybutton.alpha = 0.0
+                    self.animating = false
+                    self.Expanding = false
+                    jellybutton.removeFromSuperview()
                     index += 1
                 }
             }
@@ -263,85 +203,16 @@ class JDJellyMainButton:JDJellyButtonView
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?)
-    {
-        LastPoint = touches.first?.location(in: self.rootView!)
-        let transform = CGAffineTransform(translationX: 0, y: 6);
-        UIView.animate(withDuration: 0.25) {
+    func buttonOpenAnimation(){
+        let transform = CGAffineTransform(translationX: 0, y:6);
+        UIView.animate(withDuration: 0.25, animations: {
             self.transform = transform
+        }) { (_) in
+            UIView.animate(withDuration: 0.3, animations: {
+                self.transform = CGAffineTransform.identity
+            })
+            self.expandButtonGroup()
         }
-        
-        if(animating)
-        {
-            LastTime = nil
-            return
-        }
-        
-        if(Expanding)
-        {
-            expandignMove = true
-            closingButtonGroup(expandagain: false)
-        }
-        
-        LastTime = touches.first!.timestamp
-        
-    }
-    
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
-        let nowPoint:CGPoint = (touches.first?.location(in: self.rootView!))!
-        let diffx = nowPoint.x - (LastPoint?.x)!
-        let diffy = nowPoint.y - (LastPoint?.y)!
-        let distance = sqrt(Double(diffx * diffx) + Double(diffy * diffy))
-        if(distance > 10.0)
-        {
-            Moving = true
-        }
-        
-        if(LastTime == nil)
-        {
-            let transform = CGAffineTransform(translationX: 0, y: 0);
-            UIView.animate(withDuration: 0.3) {
-                self.transform = transform
-            }
-            
-            return
-        }
-        
-        let transform = CGAffineTransform(translationX: 0, y: 0);
-        UIView.animate(withDuration: 0.3) {
-            self.transform = transform
-        }
-        
-        if(touches.first!.timestamp - LastTime! < 0.15)
-        {
-            if(!Expanding)
-            {
-                expandButtonGroup()
-            }
-            else
-            {
-                closingButtonGroup(expandagain: false)
-            }
-            
-        }
-        else
-        {
-            if(!Moving)
-            {
-                switchButtonGroup()
-            }
-            if(expandignMove && Moving)
-            {
-                expandButtonGroup()
-            }
-        }
-        Moving = false
-        expandignMove = false
-    }
-    
-    deinit {
-        converView.removeFromSuperview()
     }
 }
 

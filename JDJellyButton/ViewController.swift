@@ -22,7 +22,6 @@ class ViewController: UIViewController {
         button.attachtoView(rootView: view,mainbutton: UIImage(named:"launcher_globalback")!)
         button.delegate = self
     }
-
 }
 
 extension ViewController:JellyButtonDelegate
