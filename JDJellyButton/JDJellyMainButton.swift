@@ -17,8 +17,6 @@ protocol MainButtonDelegate {
     func MainButtonHasBeenTap(touch:UITouch)
 }
 
-
-
 class JDJellyMainButton:JDJellyButtonView
 {
     var rootView:UIView?
@@ -299,7 +297,6 @@ class JDJellyMainButton:JDJellyButtonView
         {
             Moving = true
         }
-        
         
         if(LastTime == nil)
         {
