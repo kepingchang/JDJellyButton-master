@@ -19,7 +19,7 @@ class ViewController: UIViewController {
         view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         
         button = JDJellyButton()
-        button.attachtoView(rootView: view,mainbutton: UIImage(named:"vk")!)
+        button.attachtoView(rootView: view,mainbutton: UIImage(named:"launcher_globalback")!)
         button.delegate = self
     }
 

@@ -63,7 +63,7 @@ class JDJellyButton
     func addButtonGroup()
     {
         var jellybuttons:[JDJellyButtonView] = [JDJellyButtonView]()
-        let imgarr:[UIImage] = [UIImage(named: "hide")!,UIImage(named: "quit")!]
+        let imgarr:[UIImage] = [UIImage(named: "skill_hide")!,UIImage(named: "skill_quit")!]
         for img in imgarr
         {
             let MainButtonFrame:CGRect = CGRect(x: (MainButton.width - buttonWidth)/2, y: 0, width: buttonWidth, height: buttonHeight)
