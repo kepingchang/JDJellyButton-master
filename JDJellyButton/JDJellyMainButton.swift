@@ -36,7 +36,7 @@ class JDJellyMainButton:JDJellyButtonView
     var GroupIndex:Int = 0
     var xs:[CGFloat] = [CGFloat]()
     var ys:[CGFloat] = [CGFloat]()
-    var coverView:UIView = UIView()
+    var converView:UIView = UIView()
     
     var delegate:MainButtonDelegate?
     
@@ -214,21 +214,17 @@ class JDJellyMainButton:JDJellyButtonView
 
                 
                 let  screenSize = UIScreen.main.bounds.size
-                let converView = UIView(frame: CGRect(x: 0, y: 0, width:screenSize.width , height: screenSize.height-150))
+                converView = UIView(frame: CGRect(x: 0, y: 0, width:screenSize.width , height: screenSize.height-150))
                 converView.backgroundColor = UIColor.clear
                 jellyButtonView_2?.superview?.insertSubview(converView, at: 1)
                 let tap = UITapGestureRecognizer(target: self, action: #selector(viewDidTap))
                 converView.addGestureRecognizer(tap)
-                coverView = converView
                 }
         }
     }
 
     func viewDidTap(){
         closingButtonGroup(expandagain: false)
-        DispatchQueue.main.async { [weak self] in
-            self?.coverView.removeFromSuperview()
-        }
     }
 
     
@@ -244,7 +240,6 @@ class JDJellyMainButton:JDJellyButtonView
             {
                 for jellybutton in buttongroup!
                 {
-                    
                     animating = true
                     UIView.animate(withDuration: 0.3, delay: 0.0, options: .curveEaseOut , animations: {
                         jellybutton.frame.origin.y -=  (diff?[index].y)!
@@ -263,8 +258,8 @@ class JDJellyMainButton:JDJellyButtonView
                 }
             }
         }
+        converView.removeFromSuperview()
     }
-    
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -346,6 +341,10 @@ class JDJellyMainButton:JDJellyButtonView
         }
         Moving = false
         expandignMove = false
+    }
+    
+    deinit {
+        converView.removeFromSuperview()
     }
 }
 

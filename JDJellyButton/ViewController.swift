@@ -13,8 +13,6 @@ class ViewController: UIViewController {
 
     var button:JDJellyButton!
     @IBOutlet weak var exampleimg: UIImageView!
-    @IBOutlet weak var label1: UILabel!
-    @IBOutlet weak var label2: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,8 +30,6 @@ extension ViewController:JellyButtonDelegate
     func JellyButtonHasBeenTap(touch:UITouch,image:UIImage,groupindex:Int,arrindex:Int)
     {
         self.exampleimg.image = image
-        label1.text = "Group Index:\(groupindex)"
-        label2.text = "ArrIndex\(arrindex)"
     }
     
 }
