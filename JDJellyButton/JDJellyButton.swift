@@ -8,11 +8,8 @@ class JelllyContainer:UIView
 {
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
     }
-    /*
-     let the background totally transparent
-     */
+    
     override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
         for subview in subviews {
             if !subview.isHidden && subview.alpha > 0 && subview.isUserInteractionEnabled && subview.point(inside: convert(point, to: subview), with: event) {
@@ -22,12 +19,9 @@ class JelllyContainer:UIView
         return false
     }
     
-    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    
 }
 
 
@@ -54,8 +48,10 @@ class JDJellyButton
     func attachtoView(rootView:UIView,mainbutton image:UIImage)
     {
         RootView = rootView
-        let MainButtonFrame:CGRect = CGRect(x: (UIScreen.main.bounds.width - image.size.width) / 2, y: UIScreen.main.bounds.height - image.size.height, width: image.size.width, height: image.size.height)
+        let MainButtonFrame:CGRect = CGRect(x: (UIScreen.main.bounds.width - image.size.width) / 2, y: UIScreen.main.bounds.height - image.size.height, width: image.size.width, height: 80)
         MainButton = JDJellyMainButton(frame: MainButtonFrame, img: image, Parent: Container)
+        MainButton.imgView?.contentMode = .top
+        
         MainButton.rootView = rootView
         MainButton.delegate = self
         Container.addSubview(MainButton)
@@ -71,7 +67,9 @@ class JDJellyButton
         for img in imgarr
         {
             let MainButtonFrame:CGRect = CGRect(x: (MainButton.width - buttonWidth)/2, y: 0, width: buttonWidth, height: buttonHeight)
+            
             let jellybutton:JDJellyButtonView = JDJellyButtonView(frame: MainButtonFrame, bgimg: img)
+            jellybutton.layer.masksToBounds = true
             jellybutton.tapdelegate = self
             jellybuttons.append(jellybutton)
         }
@@ -93,8 +91,6 @@ class JDJellyButton
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    
 }
 
 extension JDJellyButton:MainButtonDelegate
